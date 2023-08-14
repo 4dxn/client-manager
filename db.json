@@ -1,17 +1,17 @@
 {
   "clientes": [
     {
-      "nombre": "Juan NUEVO!",
-      "email": "correo2@correo.com",
-      "telefono": "12",
-      "empresa": "12212",
+      "nombre": "Adan Fregoso",
+      "email": "afregoso@auronix.com",
+      "telefono": "3171280000",
+      "empresa": "Auronix",
       "id": 26
     },
     {
-      "nombre": "ekjikpdsjo wuqji",
-      "email": "uqeuiq@gmail.com",
-      "telefono": "1234999023",
-      "empresa": "KDAI",
+      "nombre": "Diego Gomez",
+      "email": "dgomez@auronix.com",
+      "telefono": "4590001010",
+      "empresa": "Auronix",
       "id": 27
     }
   ]
