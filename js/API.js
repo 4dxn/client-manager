@@ -1,24 +1,19 @@
 const url = "http://localhost:3000/clientes";
 
-// Crea un nuevo cliente
 export const nuevoCliente = async cliente => {
-    console.log(cliente);
-
     try {
         await fetch(url, {
-            method: "POST",
-            body: JSON.stringify(cliente),
-            headers: {
-                "Content-Type": "application/json"
+            method: 'POST', 
+            body: JSON.stringify(cliente), // data puede ser string o un objeto
+            headers:{
+              'Content-Type': 'application/json' // Y le decimos que los datos se enviaran como JSON
             }
-        })
-        window.location.href = "index.html";
+        });
     } catch (error) {
         console.log(error);
     }
 }
 
-// Obtiene todos los clientes
 export const obtenerClientes = async () => {
     try {
         const resultado = await fetch(url);
@@ -29,7 +24,31 @@ export const obtenerClientes = async () => {
     }
 }
 
-// Elimina un cliente
+export const obtenerCliente = async id => {
+    try {
+        const resultado = await fetch(`${url}/${id}`);
+        const cliente = await resultado.json();
+        return cliente;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
+export const editarCliente = async cliente => {
+    try {
+        await fetch(`${url}/${cliente.id}`, {
+            method: 'PUT', 
+            body: JSON.stringify(cliente), // data puede ser string o un objeto
+            headers:{
+              'Content-Type': 'application/json' // Y le decimos que los datos se enviaran como JSON
+            }
+        });
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 export const eliminarCliente = async id => {
     try {
         await fetch(`${url}/${id}`, {
@@ -37,21 +56,5 @@ export const eliminarCliente = async id => {
         });
     } catch (error) {
         console.log(error);
-    }
-}
-
-
-// Actualiza cliente
-export const editarCliente = async cliente => {
-    try {
-        await fetch(`${url}/${cliente.id}`, {
-            method: 'PUT',
-            body: JSON.stringify(cliente),
-            headers: {
-                'Content-Type': 'application-json'
-            }
-        })
-    } catch (e) {
-        console.log(e);
     }
 }

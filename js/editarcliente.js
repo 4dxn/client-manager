@@ -1,25 +1,27 @@
-import { editarCliente, nuevoCliente } from "./API";
-import { mostrarAlerta } from './funciones.js'
+import {obtenerCliente, editarCliente } from './API.js';
+import { mostrarAlerta } from './funciones.js';
 
 (function() {
-    const nombreInput = document.querySelector("#nombre");
-    const emailInput = document.querySelector("#email");
-    const telefonoInput = document.querySelector("#telefono");
-    const empresaInput = document.querySelector("#empresa");
-    const idInput = document.querySelector("#id");
+
+
+    const nombreInput = document.querySelector('#nombre');
+    const emailInput = document.querySelector('#email');
+    const telefonoInput = document.querySelector('#telefono');
+    const empresaInput = document.querySelector('#empresa');
+    const idInput = document.querySelector('#id');
 
     document.addEventListener('DOMContentLoaded', async () => {
-        const parametroURL = new URLSearchParams(window.location.search);
-        const idCliente = parseInt(parametroURL.get('id'));
-
-        const cliente = await obtenerCliente(idCliente);
-
-        console.log(cliente);
-
+        // Verificar si el cliente existe
+        const parametrosURL = new URLSearchParams(window.location.search);
+        const idCliente = parseInt( parametrosURL.get('id') );
+        
+        const cliente = await obtenerCliente(idCliente)
         mostrarCliente(cliente);
-
-        const formulario = document.querySelector("#formulario");
+       
+        // registra el formulario
+        const formulario = document.querySelector('#formulario');
         formulario.addEventListener('submit', validarCliente);
+       
     });
 
     function mostrarCliente(cliente) {
@@ -32,28 +34,27 @@ import { mostrarAlerta } from './funciones.js'
         idInput.value = id;
     }
 
-    function validarCliente(e) {
+
+    async function validarCliente(e) {
         e.preventDefault();
-
-
         const cliente = {
-            nombre: nombreInput.value,
-            email: emailInput.value,
+            nombre: nombreInput.value, 
+            email: emailInput.value, 
             telefono: telefonoInput.value,
             empresa: empresaInput.value,
             id: parseInt(idInput.value)
         }
-
-        if (validar(cliente)) {
+        if( validar(cliente) ) {
             mostrarAlerta('Todos los campos son obligatorios');
             return;
         }
 
-        editarCliente(cliente);
+        await editarCliente(cliente);
+        window.location.href = 'index.html';
     }
 
 
-	function validar(objeto) {
-		return Object.values(objeto).every(input => input !== '');
-	}
+    function validar(obj) {
+        return !Object.values(obj).every(element => element !== '') ;
+    }
 })();
