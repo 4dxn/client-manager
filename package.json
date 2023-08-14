@@ -4,10 +4,12 @@
   "author": "Adan & Diego @ Auronix Tech",
   "scripts": {
     "json-server": "npx json-server --watch db.json",
-    "live-server": "npx http-server"
+    "live-server": "npx http-server",
+    "live-server-dev": "npx nodemon --exec \"npx http-server\" -e js,html --delay 3000ms"
   },
   "dependencies": {
     "http-server": "^14.1.1",
-    "json-server": "^0.17.3"
+    "json-server": "^0.17.3",
+    "nodemon": "^3.0.1"
   }
 }
