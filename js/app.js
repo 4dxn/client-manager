@@ -1,18 +1,17 @@
-import { obtenerClientes, eliminarCliente } from './API.js'
+import { obtenerClientes, eliminarCliente } from './API.js';
 
 (function() {
-    const listado = document.querySelector("#listado-clientes");
-    
-    document.addEventListener('DOMContentLoaded', mostrarClientes);
+    const listado = document.querySelector('#listado-clientes');
+    listado.addEventListener('click', confirmarEliminar);
 
-    document.addEventListener('click', confirmarEliminar);
+
+    document.addEventListener('DOMContentLoaded', mostrarClientes);
 
     async function mostrarClientes() {
         const clientes = await obtenerClientes();
-
-        clientes.forEach(cliente => {
+        
+        clientes.forEach( cliente => {
             const { nombre, email, telefono, empresa, id } = cliente;
-
             const row = document.createElement('tr');
 
             row.innerHTML += `
@@ -36,14 +35,18 @@ import { obtenerClientes, eliminarCliente } from './API.js'
         })
     }
 
-    function confirmarEliminar(e) {
-        if(e.target.classList.contains('eliminar')) {
-            const clienteId = parseInt(e.target.dataset.cliente);
+   async function confirmarEliminar(e) {
+        if( e.target.classList.contains('eliminar') ) {
+            const clienteId = parseInt( e.target.dataset.cliente)
+            console.log(clienteId);
+            const confirmar = confirm('¿Deseas eliminar este cliente?');
 
-            const confirmar = confirm('¿Deseas eliminar este registro?')
             if(confirmar) {
-                eliminarCliente(clienteId);
+                await eliminarCliente(clienteId)
             }
+
         }
     }
+
 })();
+

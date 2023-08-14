@@ -1,9 +1,7 @@
 {
   "name": "client-manager",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "author": "Adan & Diego @ Auronix",
+  "version": "0.1.0",
+  "author": "Adan & Diego @ Auronix Tech",
   "scripts": {
     "json-server": "npx json-server --watch db.json",
     "live-server": "npx http-server"
